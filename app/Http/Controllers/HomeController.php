@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\SwapService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    /** @var SwapService */
+    protected $swapService;
+
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * @param SwapService $swapService
      */
-    public function __construct()
+    public function __construct(SwapService $swapService)
     {
-        $this->middleware('auth');
+        $this->swapService = $swapService;
     }
 
     /**
@@ -23,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        dd($this->swapService->connect());
         return view('home');
     }
 }
